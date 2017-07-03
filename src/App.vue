@@ -55,7 +55,7 @@
 
 <script>
   import Firebase from 'firebase'
-
+  import toastr from 'toastr'
   let config = {
     apiKey: 'AIzaSyBIjfO-0CUe6s5xJTeiAwQ27JbGxv6eaSg',
     authDomain: 'vuejs-a913f.firebaseapp.com',
@@ -93,6 +93,7 @@
       },
       removeBook: function (book) {
         bookRef.child(book['.key']).remove()
+        toastr.success('Book removed')
       }
     }
   }
