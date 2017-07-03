@@ -37,12 +37,14 @@
             <tr>
               <th>Title</th>
               <th>Author</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="book in books">
               <td><a v-bind:href="book.url">{{book.title}}</a></td>
               <td>{{book.author}}</td>
+              <td><span class="glyphicon glyphicon-trash" @click="removeBook(book)"></span></td>
             </tr>
           </tbody>
         </table>
@@ -88,6 +90,9 @@
         this.newBook.title = ''
         this.newBook.author = ''
         this.newBook.url = ''
+      },
+      removeBook: function (book) {
+        bookRef.child(book['.key']).remove()
       }
     }
   }
