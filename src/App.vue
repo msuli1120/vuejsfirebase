@@ -9,7 +9,7 @@
         <h3>Add Book</h3>
       </div>
       <div class="panel-body">
-        <form class="form-inline" id="form">
+        <form class="form-inline" id="form" v-on:submit.prevent="addBook">
           <div class="form-group">
             <label for="bookTitle">Title:</label>
             <input type="text" id="bookTitle" class="form-control" v-model="newBook.title">
@@ -35,22 +35,14 @@
         <table class="table table-stripe">
           <thead>
             <tr>
-              <th>
-                Title
-              </th>
-              <th>
-                Author
-              </th>
+              <th>Title</th>
+              <th>Author</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="book in books">
-              <td>
-                <a v-bind:href="book.url">{{book.title}}</a>
-              </td>
-              <td>
-                {{book.author}}
-              </td>
+              <td><a v-bind:href="book.url">{{book.title}}</a></td>
+              <td>{{book.author}}</td>
             </tr>
           </tbody>
         </table>
@@ -88,7 +80,14 @@
           author: '',
           url: ''
         }
-
+      }
+    },
+    methods: {
+      addBook: function () {
+        bookRef.push(this.newBook)
+        this.newBook.title = ''
+        this.newBook.author = ''
+        this.newBook.url = ''
       }
     }
   }
